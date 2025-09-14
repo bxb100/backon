@@ -98,7 +98,7 @@
 //!     Ok("hello, world!".to_string())
 //! }
 //!
-//! #[tokio::main]
+//! #[tokio::main(flavor = "current_thread")]
 //! async fn main() -> Result<()> {
 //!     let content = fetch
 //!         // Retry with exponential backoff

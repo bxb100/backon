@@ -151,7 +151,7 @@ where
 {
     /// Set the sleeper for retrying.
     ///
-    /// The sleeper should implement the [`Sleeper`] trait. The simplest way is to use a closure that returns a `Future<Output=()>`.
+    /// The sleeper should implement the [`Sleeper`] trait. The simplest way is to use a closure that returns a `Future`.
     ///
     /// If not specified, we use the [`DefaultSleeper`].
     pub fn sleep<SN: Sleeper>(
@@ -284,7 +284,7 @@ where
 }
 
 /// State maintains internal state of retry.
-enum State<T, E, Ctx, Fut: Future<Output = (Ctx, Result<T, E>)>, SleepFut: Future<Output = ()>> {
+enum State<T, E, Ctx, Fut: Future<Output = (Ctx, Result<T, E>)>, SleepFut: Future> {
     Idle(Option<Ctx>),
     Polling(Fut),
     Sleeping((Option<Ctx>, SleepFut)),

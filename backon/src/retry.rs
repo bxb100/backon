@@ -118,7 +118,7 @@ where
 {
     /// Set the sleeper for retrying.
     ///
-    /// The sleeper should implement the [`Sleeper`] trait. The simplest way is to use a closure that returns a `Future<Output=()>`.
+    /// The sleeper should implement the [`Sleeper`] trait. The simplest way is to use a closure that returns a `Future`.
     ///
     /// If not specified, we use the [`DefaultSleeper`].
     ///
@@ -344,7 +344,7 @@ where
 
 /// State maintains internal state of retry.
 #[derive(Default)]
-enum State<T, E, Fut: Future<Output = Result<T, E>>, SleepFut: Future<Output = ()>> {
+enum State<T, E, Fut: Future<Output = Result<T, E>>, SleepFut: Future> {
     #[default]
     Idle,
     Polling(Fut),
